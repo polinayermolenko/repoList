@@ -38,22 +38,18 @@
 }
 
 .list__item {
+    display: block;
     font-size: 30px;
     width: 500px;
-    background: #E3E3E3;
-}
-
-.list__button {
+    background-color: #E3E3E3;
     box-sizing: border-box;
     text-align: left;
-    width: 500px;
-    font: inherit;
     padding: 10px;
     border: 2px solid #000000;
-    background-color: transparent;
+    cursor: pointer;
 }
 
-.list__button:hover {
+.list__item:hover {
     background-color: #65CDF9;
 }
 

@@ -12,10 +12,12 @@ const debounce = (fn, debounceTime) => {
 };
 
 const createAutocompleteTemplate = (repoName, id) => {
-  return `<li class="list__item">
-      <button id=${id} class="list__button" type="button">${repoName}</button>
+  return `<li class="list__item" data-id=${id}>
+     ${repoName}
     </li>`;
 };
+
+/* <button id=${id} class="list__button" type="button">${repoName}</button> */
 
 const createRepoList = (obj) => {
   const { name, owner, stargazers_count } = obj;
@@ -72,27 +74,25 @@ const onChange = debounce((evt) => {
       }
 
       items.forEach((item) => {
-        const element = createElement(
+        const liItem = createElement(
           createAutocompleteTemplate(item.name, item.id)
         );
-        render(list, element);
-        const btn = element.querySelector(".list__button");
-
-        btn.addEventListener("click", () => {
-          if (btn.id == item.id) {
+        render(list, liItem);
+        liItem.addEventListener("click", () => {
+          if (liItem.dataset.id == item.id) {
             search.value = "";
             list.innerHTML = "";
             const repoListItem = createElement(createRepoList(item));
             render(repoList, repoListItem);
             const deleteBtn = repoListItem.querySelector(".result__btn");
             deleteBtn.addEventListener("click", () => {
-              if (btn.id == item.id) {
+              if (liItem.dataset.id == item.id) {
                 repoList.removeChild(repoListItem);
               }
             });
           }
-        });
-      });
+        })
+     });
     })
     .catch((err) => {
       console.log(err);
