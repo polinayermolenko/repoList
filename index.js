@@ -40,10 +40,10 @@ const render = (container, element) => {
   container.append(element);
 };
 
-const liItemClickHandler = (evt) => {
-  const liItem = evt.target;
+const autocompleteListItemClickHanlder = (evt) => {
+  const autocompleteListItem = evt.target;
 
-  const dataItem = repoData.find((item) => item.id == liItem.id);
+  const dataItem = repoData.find((item) => item.id == autocompleteListItem.id);
   if (dataItem) {
     search.value = "";
     list.innerHTML = "";
@@ -62,12 +62,14 @@ const createAutocompleteResults = (items) => {
     list.innerHTML = "";
   }
   return items.forEach((item) => {
-    const liItem = createElement(
+    const autocompleteListItem = createElement(
       createAutocompleteTemplate(item.name, item.id)
     );
-    render(list, liItem);
+    render(list, autocompleteListItem);
 
-    liItem.addEventListener("click", (evt) => liItemClickHandler(evt));
+    autocompleteListItem.addEventListener("click", (evt) =>
+      autocompleteListItemClickHanlder(evt)
+    );
   });
 };
 
